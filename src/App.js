@@ -1,11 +1,11 @@
 
 import './App.scss';
-import {Home, ProductList} from './pages'
+import {Home, ProductList, SingleProduct, Register, Login} from './pages'
 
 function App() {
   return (
     <div className="App">
-      <ProductList />
+      <Login />
     </div>
   );
 }
