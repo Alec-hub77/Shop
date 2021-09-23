@@ -18,6 +18,10 @@
     width: 25%;
     background-color: #fff;
 
+    @media only screen and (max-width: 380px) {
+       width: 75%;
+      }
+
     form {
         display: flex;
         flex-direction: column;

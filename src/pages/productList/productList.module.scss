@@ -13,15 +13,28 @@
 .filter {
     margin: 20px;
 
+    @media only screen and (max-width: 380px) {
+        margin: 0 20px;
+        display: flex;
+        flex-direction: column;
+       }
+
     span {
         font-size: 20px;
         font-weight: 600;
         margin-right: 20px;
+        @media only screen and (max-width: 380px) {
+            margin-right: 0;
+           }
     }
 
     select {
         padding: 10px;
         margin-right: 10px;
+
+        @media only screen and (max-width: 380px) {
+            margin: 10px 0;
+           }
 
     }
 

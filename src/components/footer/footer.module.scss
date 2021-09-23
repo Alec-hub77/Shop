@@ -1,5 +1,9 @@
 .container {
     display: flex;
+
+    @media only screen and (max-width: 380px) {
+        flex-direction: column;
+      }
 }
 
 .left {
@@ -12,6 +16,10 @@
 .center {
     flex: 1;
     padding: 20px;
+
+    @media only screen and (max-width: 380px) {
+        display: none;
+      }
 }
 
 .right {
