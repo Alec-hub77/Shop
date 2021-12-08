@@ -1,8 +1,9 @@
 import './App.scss';
 import { Home, ProductList, SingleProduct, Register, Login, Cart } from './pages';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 function App() {
+  const user = true;
   return (
     <BrowserRouter>
       <div className="App">
@@ -10,20 +11,20 @@ function App() {
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/productlist">
+          <Route path="/productlist/:category">
             <ProductList />
           </Route>
-          <Route path="/product">
+          <Route path="/product/:id">
             <SingleProduct />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/login">
-            <Login />
           </Route>
           <Route path="/cart">
             <Cart/>
+          </Route>
+          <Route path="/register">
+          {user ? <Redirect to="/"/> : <Register />}
+          </Route>
+          <Route path="/login">
+            {user ? <Redirect to="/"/> : <Login />}
           </Route>
         </Switch>
       </div>

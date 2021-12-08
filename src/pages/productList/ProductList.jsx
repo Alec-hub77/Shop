@@ -7,8 +7,23 @@ import {
   Newsletter,
   Footer,
 } from '../../components';
+import { useLocation } from 'react-router';
 
 const ProductList = () => {
+  const location = useLocation()
+  const cat = location.pathname.split('/')[2]
+  const [filters, setFilters] = React.useState({})
+  const [sort, setSort] = React.useState('newest')
+
+  const handleFilters = (e) => {
+    const value = e.target.value
+    setFilters({
+      ...filters,
+      [e.target.name] : value,
+    })
+  }
+  
+
   return (
     <div className={style.container}>
       <Announcement />
@@ -19,36 +34,36 @@ const ProductList = () => {
           <span>
             Filter products:
             </span>
-            <select name="" id="" defaultValue={"Color"}>
+            <select name="color"  defaultValue={"Color"} onChange={handleFilters}>
             <option disabled  value="Color">Color</option>
-              <option value="">White</option>
-              <option value="">Black</option>
-              <option value="">Red</option>
-              <option value="">Blue</option>
-              <option value="">Yellow</option>
-              <option value="">Green</option>
+              <option value="White">White</option>
+              <option value="Black">Black</option>
+              <option value="Red">Red</option>
+              <option value="Blue">Blue</option>
+              <option value="Yellow">Yellow</option>
+              <option value="Green">Green</option>
             </select>
-            <select name="" id="">
-            <option disabled selected value="">Size</option>
-              <option value="">S</option>
-              <option value="">XS</option>
-              <option value="">M</option>
-              <option value="">L</option>
-              <option value="">Xl</option>
+            <select name="size" onChange={handleFilters}>
+            <option disabled defaultValue={"Size"}>Size</option>
+              <option value="S">S</option>
+              <option value="XS">XS</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
             </select>
           
         </div>
         <div className={style.filter}>
           <span>Sort products: </span>
-            <select name="" id="">
-                <option selected value="">Newest</option>
-                <option value="">Price (asc)</option>
-                <option value="">Price (desc)</option>
+            <select name="" onChange={(e) => setSort(e.target.value)}>
+                <option selected value="newest">Newest</option>
+                <option value="asc">Price (asc)</option>
+                <option value="desc">Price (desc)</option>
             </select>
           
         </div>
       </div>
-      <Products />
+      <Products cat={cat} filters={filters} sort={sort} />
       <Newsletter />
       <Footer />
     </div>
