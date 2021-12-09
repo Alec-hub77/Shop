@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './products.module.scss';
-import { popularProducts } from '../../data';
 import Product from './Product';
 import axios from 'axios';
 

@@ -1,5 +1,5 @@
 import './App.scss';
-import { Home, ProductList, SingleProduct, Register, Login, Cart } from './pages';
+import { Home, ProductList, SingleProduct, Register, Login, Cart, Success } from './pages';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import  ScrollToTop  from './helpers/scrollToTop'
 
@@ -27,6 +27,9 @@ function App() {
           </Route>
           <Route path="/login">
             {user ? <Redirect to="/"/> : <Login />}
+          </Route>
+          <Route path="/success">
+            <Success/>
           </Route>
         </Switch>
         </ScrollToTop>

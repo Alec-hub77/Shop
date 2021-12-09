@@ -4,6 +4,8 @@ import { Announcement, Navbar, Newsletter, Footer } from '../../components';
 import { Remove, Add } from '@material-ui/icons';
 import { useLocation } from 'react-router';
 import { publicRequest } from './../../requestMethods';
+import { addProduct } from '../../redux/cartRedux';
+import { useDispatch } from 'react-redux';
 
 
 
@@ -15,6 +17,7 @@ const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1)
   const [color, setColor] = useState('')
   const [size, setSize] = useState('')
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const getProduct = async () => {
@@ -37,7 +40,7 @@ const SingleProduct = () => {
   }
 
   const onAddtoCart = () => {
-    // update
+    dispatch(addProduct({...product, quantity, color, size})) 
   }
   
   
