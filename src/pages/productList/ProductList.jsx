@@ -28,7 +28,7 @@ const ProductList = () => {
     <div className={style.container}>
       <Announcement />
       <Navbar />
-      <h1 className={style.title}>Dresses</h1>
+      <h1 className={style.title}>{cat.toUpperCase()}</h1>
       <div className={style.filterContainer}>
         <div className={style.filter}>
           <span>
