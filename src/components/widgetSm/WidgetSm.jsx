@@ -1,52 +1,33 @@
 import { Visibility } from '@material-ui/icons'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { userRequest } from '../../requestMethods'
 import './widgetSm.scss'
 
 const WidgetSm = () => {
+
+    const [users, setUsers] = useState([])
+    
+    useEffect(() => {
+        const getUsers = async () => {
+            const res = await userRequest.get('users/?new=true')
+            setUsers(res.data)
+        }
+        getUsers()
+    }, [users])
     return (
         <div className="widgetSm">
             <span className="widgetSmTitle">New Join Members</span>
             <ul className="widgetSmList">
-                <li className="widgetSmItem">
-                    <img src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
+                {users.map(user => (
+                    <li className="widgetSmItem" key={user._id}>
+                    <img src={user.img || 'https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-avatar-vector-isolated-on-white-background-png-image_1694546.jpg'} alt="" />
                     <div className="widgetSmUser">
-                        <span className="userName">Anna Keller</span>
-                        <span className="jobTitle">Software Engineer</span>
+                        <span className="userName">{user.username}</span>
                     </div>
                     <button className="widgetSmBtn"><Visibility/>Display</button>
                 </li>
-                <li className="widgetSmItem">
-                    <img src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
-                    <div className="widgetSmUser">
-                        <span className="userName">Anna Keller</span>
-                        <span className="jobTitle">Software Engineer</span>
-                    </div>
-                    <button className="widgetSmBtn"><Visibility/>Display</button>
-                </li>
-                <li className="widgetSmItem">
-                    <img src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
-                    <div className="widgetSmUser">
-                        <span className="userName">Anna Keller</span>
-                        <span className="jobTitle">Software Engineer</span>
-                    </div>
-                    <button className="widgetSmBtn"><Visibility/>Display</button>
-                </li>
-                <li className="widgetSmItem">
-                    <img src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
-                    <div className="widgetSmUser">
-                        <span className="userName">Anna Keller</span>
-                        <span className="jobTitle">Software Engineer</span>
-                    </div>
-                    <button className="widgetSmBtn"><Visibility/>Display</button>
-                </li>
-                <li className="widgetSmItem">
-                    <img src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
-                    <div className="widgetSmUser">
-                        <span className="userName">Anna Keller</span>
-                        <span className="jobTitle">Software Engineer</span>
-                    </div>
-                    <button className="widgetSmBtn"><Visibility/>Display</button>
-                </li>
+                ))}
+                
             </ul>
         </div>
     )

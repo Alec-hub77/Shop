@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { userRequest } from '../../requestMethods'
 import './widgetLg.scss'
+import { format } from 'timeago.js'
 
 const WidgetLg = () => {
+
+    const [orders, setOrders] = useState([])
+    
+    useEffect(() => {
+        const getOrders = async () => {
+            const res = await userRequest.get('orders')
+            setOrders(res.data)
+        }
+        getOrders()
+    }, [orders])
+
 
     const Button = ({type}) => {
         return (
@@ -19,66 +32,24 @@ const WidgetLg = () => {
                     <th>Amount</th>
                     <th>Status</th>
                 </tr>
-                <tr>
+                {orders.map(order => (
+                    <tr>
                     <td className="tdUser">
-                        <img src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
-                        <span className="userName">Suzan Carol</span>
+                        <span className="userName">{order.userId}</span>
                     </td>
                     <td className="date">
-                        2 Jun 2021
+                        {format(order.createdAt)}
                     </td>
                     <td className="amount">
-                        $122.00
+                        $ {order.amount}
                     </td>
                     <td className="status">
-                        <Button type="Approved"/>
+                        <Button type={order.status}/>
                     </td>
                 </tr>
-                <tr>
-                    <td className="tdUser">
-                        <img src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
-                        <span className="userName">Suzan Carol</span>
-                    </td>
-                    <td className="date">
-                        2 Jun 2021
-                    </td>
-                    <td className="amount">
-                        $122.00
-                    </td>
-                    <td className="status">
-                        <Button type="Declined"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td className="tdUser">
-                        <img src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
-                        <span className="userName">Suzan Carol</span>
-                    </td>
-                    <td className="date">
-                        2 Jun 2021
-                    </td>
-                    <td className="amount">
-                        $122.00
-                    </td>
-                    <td className="status">
-                        <Button type="Pending"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td className="tdUser">
-                        <img src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
-                        <span className="userName">Suzan Carol</span>
-                    </td>
-                    <td className="date">
-                        2 Jun 2021
-                    </td>
-                    <td className="amount">
-                        $122.00
-                    </td>
-                    <td className="status">
-                        <Button type="Approved"/>
-                    </td>
-                </tr>
+                ))}
+                
+                
             </table>
         </div>
     )
