@@ -45,12 +45,12 @@ const Products = ({ cat, filters, sort }) => {
       setFiltredProduct((prev) => [...prev].sort((a, b) => b.price - a.price));
     }
   }, [sort]);
-
+  
   return (
     <div className={style.container}>
       {cat
-        ? filtredProduct.map((item) => <Product key={item.id} item={item} />)
-        : products.slice(0,8).map((item) => <Product key={item.id} item={item} />)}
+        ? filtredProduct.map((item) => <Product key={item._id} item={item} />)
+        : products.slice(0,8).map((item) => <Product key={item._id} item={item} />)}
     </div>
   );
 };

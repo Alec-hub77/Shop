@@ -7,7 +7,8 @@ import StripeCheckout from 'react-stripe-checkout';
 import { userRequest } from '../../requestMethods';
 import { useHistory } from 'react-router';
 
-const KEY = process.env.REACT_APP_STRIPE_KEY;
+// const KEY = process.env.REACT_APP_STRIPE_KEY;
+// const KEY = 'pk_test_51K45XLG6iY0QLlkS83Jx8myymcYoWoCTy8N8Z9PL6y6kG2czA7RAnnZx26XTywwox3JYOHN2CweSh54P3WU2FU7b00NPDGILdk';
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -21,11 +22,11 @@ const Cart = () => {
   useEffect(() => { 
       const makeRequest = async () => {
           try {
-            const res = await userRequest.post('checkout/payment', {
+            const res = await userRequest.post('/checkout/payment', {
                 tokenId: stripeToken.id,
                 amount: cart.total * 100
             })
-            history.push('/success', {data: res.data})
+            history.push('/success', {data: res.data, products: cart})
           } catch (err) {
               console.log(err)
           }
@@ -110,12 +111,13 @@ const Cart = () => {
               <span className={style.summeryPrice}>$ {cart.total + 10}</span>
             </div>
             <StripeCheckout
+              name="Shop"
               billingAddress
               shippingAddress
               description={`Your total is $${cart.total + 10}`}
               amount={(cart.total + 10) * 100}
               token={onToken}
-              stripeKey={KEY}
+              stripeKey='pk_test_51K45XLG6iY0QLlkS83Jx8myymcYoWoCTy8N8Z9PL6y6kG2czA7RAnnZx26XTywwox3JYOHN2CweSh54P3WU2FU7b00NPDGILdk'
             >
               <button className={style.summeryBtn}>CHECKOUT NOW</button>
             </StripeCheckout>

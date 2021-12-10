@@ -48,6 +48,10 @@
         font-weight: 500;
         cursor: pointer;
         margin-bottom: 10px;
+        &:disabled {
+            color: grey;
+            cursor: not-allowed;
+        }
     }
 
     a {

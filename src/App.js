@@ -2,9 +2,10 @@ import './App.scss';
 import { Home, ProductList, SingleProduct, Register, Login, Cart, Success } from './pages';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import  ScrollToTop  from './helpers/scrollToTop'
+import { useSelector } from 'react-redux';
 
 function App() {
-  const user = true;
+  const user = useSelector(state => state.user.currentUser);
   return (
     <BrowserRouter>
       <div className="App">
