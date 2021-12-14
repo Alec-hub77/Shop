@@ -13,7 +13,7 @@ const WidgetSm = () => {
             setUsers(res.data)
         }
         getUsers()
-    }, [users])
+    }, [])
     return (
         <div className="widgetSm">
             <span className="widgetSmTitle">New Join Members</span>

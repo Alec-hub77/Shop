@@ -27,7 +27,7 @@ const Home = () => {
     useEffect(() => {
         const getStats = async () => {
             try {
-                const res = await userRequest.get('/users/stats')
+                const res = await userRequest.get('users/stats')
                 res.data.map(item => {
                     setUserStats(prev => [...prev, {name: MONTHS[item._id - 1], 'Active User': item.total}])
                 })
@@ -38,7 +38,7 @@ const Home = () => {
         getStats()
     }, [MONTHS])
 
-    console.log(userStats)
+    
     return (
         <div className="home">
             <FeaturedInfo/>

@@ -13,7 +13,7 @@ const WidgetLg = () => {
             setOrders(res.data)
         }
         getOrders()
-    }, [orders])
+    }, [])
 
 
     const Button = ({type}) => {
@@ -33,7 +33,7 @@ const WidgetLg = () => {
                     <th>Status</th>
                 </tr>
                 {orders.map(order => (
-                    <tr>
+                    <tr key={order._id}>
                     <td className="tdUser">
                         <span className="userName">{order.userId}</span>
                     </td>

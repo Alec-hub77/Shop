@@ -3,9 +3,11 @@ import { useState } from 'react';
 import './login.scss';
 import { useDispatch } from 'react-redux';
 import { login } from './../../redux/apiCalls';
+import { useHistory } from 'react-router';
 
 
 const Login = () => {
+    const history = useHistory()
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -14,6 +16,7 @@ const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         login(dispatch, {username, password})
+        history.push('/')
     }
 
   return (
